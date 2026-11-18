@@ -11,6 +11,11 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { AppSidebar } from "@/components/app/app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { ShieldAlert } from "lucide-react";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -81,14 +86,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "AI Workplace Productivity Assistant" },
+      {
+        name: "description",
+        content: "AI tools for South African professionals: emails, meeting notes, task planning, research and chat.",
+      },
+      { property: "og:title", content: "AI Workplace Productivity Assistant" },
+      {
+        property: "og:description",
+        content: "AI tools for South African professionals: emails, meeting notes, task planning, research and chat.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -96,6 +105,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -106,7 +121,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-ZA">
       <head>
         <HeadContent />
       </head>
@@ -123,8 +138,38 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <TooltipProvider delayDuration={200}>
+        <SidebarProvider>
+          <div className="flex min-h-screen w-full">
+            <AppSidebar />
+            <div className="flex min-w-0 flex-1 flex-col">
+              <header className="sticky top-0 z-20 flex h-14 items-center gap-3 border-b bg-card/85 px-3 backdrop-blur md:px-5">
+                <SidebarTrigger aria-label="Toggle navigation" />
+                <span className="truncate font-display text-sm font-semibold text-foreground">
+                  AI Workplace Productivity Assistant
+                </span>
+              </header>
+              <main className="flex-1">
+                {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                <Outlet />
+              </main>
+              <footer className="sticky bottom-0 z-10 border-t bg-card/95 px-4 py-2.5 backdrop-blur md:px-6">
+                <p className="flex items-start gap-2 text-xs text-muted-foreground">
+                  <ShieldAlert className="mt-0.5 size-3.5 shrink-0 text-warning" aria-hidden="true" />
+                  <span>
+                    AI-generated content may be inaccurate or biased. Review before use. Don't enter confidential or
+                    personal information.{" "}
+                    <Link to="/responsible-ai" className="font-medium text-primary hover:underline">
+                      Learn more
+                    </Link>
+                  </span>
+                </p>
+              </footer>
+            </div>
+          </div>
+        </SidebarProvider>
+        <Toaster richColors position="top-right" />
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }
