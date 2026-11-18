@@ -26,8 +26,6 @@ Professionals spend a large part of their day on repetitive tasks: writing email
 | **AI Research Assistant** | Summarises a topic or article, gives key insights and recommendations, and lists points to verify. |
 | **AI Chatbot** | Interactive workplace assistant with message history and suggested prompts. |
 
-> [Delete any features you did not build.]
-
 **Platform features:** dashboard home with quick-action cards, sidebar navigation, responsive layout (desktop and mobile), input and output panels, editable AI outputs, copy and regenerate buttons, loading states, and a Responsible AI page.
 
 ## Prompt Engineering Approach
