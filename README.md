@@ -59,10 +59,10 @@ Prompts were tested with realistic inputs and refined over several iterations to
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/[your-username]/[your-repo-name].git
+git clone https://github.com/ebenjonwillemse-cyber/ubuntu-workmate-ai.git
 
 # 2. Move into the project folder
-cd [your-repo-name]
+cd ubuntu-workmate-ai
 
 # 3. Install dependencies
 npm install
