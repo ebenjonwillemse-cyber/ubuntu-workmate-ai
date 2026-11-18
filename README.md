@@ -1,44 +1,99 @@
-# Ubuntu Workmate Ai
+# Ubuntu Workmate AI
 
-Build a modern, responsive web app called "AI Workplace Productivity Assistant" for South African professionals. SaaS-style dashboard: left sidebar navigation (collapsible into a hamburger menu on mobile), clean white/indigo theme, card-based layout, loading spinners, and toast notifications.
+*AI Workplace Productivity Assistant for South African professionals*
 
-Pages (each with an input panel on the left and an AI output panel on the right, and the output must be editable, with Copy and Regenerate buttons):
+An AI-powered dashboard that helps professionals automate everyday workplace tasks such as drafting emails, summarising meetings, planning schedules, researching topics and getting quick answers, all in one application.
 
-1. Smart Email Generator – inputs: recipient audience (Client / Manager / Team), tone (Formal / Friendly / Persuasive), purpose, key points. Output: subject line + email body.
+Built as part of the CAPACITI AI Skills Accelerator Programme.
 
-2. Meeting Notes Summarizer – input: pasted notes. Output in sections: Summary, Key Points, Decisions, Action Items (table with Owner and Deadline).
+**Live demo:** [paste your published Lovable link here]
 
-3. AI Task Planner – inputs: task list, deadlines, available hours. Output: a daily/weekly schedule prioritised by urgency and importance (Eisenhower matrix), plus time-optimisation tips.
+**Lovable project:** https://lovable.dev/projects/65d97395-0216-49aa-875d-1682d16c67e5
 
-4. AI Research Assistant – input: topic or pasted article. Output: simple summary, key insights, recommendations, and "things to verify".
+## Project Overview
 
-5. AI Chatbot – chat interface with message history, typing indicator and suggested prompts, acting as a workplace assistant.
+Professionals spend a large part of their day on repetitive tasks: writing emails, summarising information, planning their time and doing research. This project brings those tasks into a single, easy-to-use dashboard where AI generates a first draft that the user can review, edit and use.
 
-Home dashboard: welcome message, quick-action cards for each tool, and a "Recent activity" list.
+**Target users:** graduates, professionals, admin and operations staff, and managers who want to save time on routine work.
 
-Use Lovable AI/Cloud to call an LLM. Each feature must use a structured system prompt that sets a role, the task, the output format, and constraints (be concise, don't invent facts, flag uncertainty).
+## Features Implemented
 
-Responsible AI: show a persistent footer disclaimer ("AI-generated content may be inaccurate or biased. Review before use. Don't enter confidential or personal information.") plus a short "Responsible AI" page covering limitations, bias, privacy and human review.
+| Feature | What it does |
+|---|---|
+| **Smart Email Generator** | Generates professional emails from a purpose and key points. Supports Formal, Friendly and Persuasive tones and adapts to the audience (Client, Manager, Team). |
+| **Meeting Notes Summarizer** | Turns lengthy notes into a summary, key points, decisions, and an action items table with owners and deadlines. |
+| **AI Task Planner** | Builds a prioritised daily or weekly schedule using urgency and importance, with time-optimisation tips. |
+| **AI Research Assistant** | Summarises a topic or article, gives key insights and recommendations, and lists points to verify. |
+| **AI Chatbot** | Interactive workplace assistant with message history and suggested prompts. |
 
-no login and backend required
+> [Delete any features you did not build.]
 
-This project was built with [Lovable](https://lovable.dev).
+**Platform features:** dashboard home with quick-action cards, sidebar navigation, responsive layout (desktop and mobile), input and output panels, editable AI outputs, copy and regenerate buttons, loading states, and a Responsible AI page.
 
-## Build with Lovable
+## Prompt Engineering Approach
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/65d97395-0216-49aa-875d-1682d16c67e5).
+Each feature uses a structured system prompt with four parts:
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+1. **Role**: who the AI should act as (e.g. an expert executive assistant)
+2. **Task**: what it must do with the user's input
+3. **Output format**: a fixed structure (sections, tables, subject and body)
+4. **Constraints**: use only the information provided, mark missing details as "Not specified", do not invent facts, flag uncertainty
 
-## Development
+Prompts were tested with realistic inputs and refined over several iterations to improve accuracy and tone.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Responsible AI
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+- A disclaimer is visible throughout the app: AI-generated content may be inaccurate or biased and must be reviewed before use.
+- Users are warned not to enter confidential or personal information.
+- All outputs are editable so a human always has the final say.
+- Prompts instruct the model not to invent facts and to flag uncertainty.
+- A dedicated Responsible AI page explains limitations, bias, privacy and human review.
+
+## Technologies and Tools Used
+
+- **Lovable**: AI app builder used to generate and host the application
+- **ChatGPT**: used to design and refine prompts
+- **LLM via Lovable AI / Cloud**: powers the AI features
+- **GitHub**: version control and project storage
+- **Frontend:** React, TypeScript, Tailwind CSS (generated by Lovable)
+
+## Setup Instructions
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/[your-username]/[your-repo-name].git
+
+# 2. Move into the project folder
+cd [your-repo-name]
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
 npm run dev
 ```
+
+Then open the local URL shown in your terminal (usually `http://localhost:5173`).
+
+**Notes**
+- Requires Node.js 18 or later.
+
+
+## Project Structure
+
+```
+src/
+  components/   Reusable UI components (sidebar, cards, output panels)
+  pages/        One page per feature (Email, Meetings, Planner, Research, Chat)
+  ...
+```
+
+> [Adjust to match your actual folders.]
+
+## Team Members
+
+- [Your full name], [role, e.g. developer and prompt designer]
+
+## Acknowledgements
+
+Created for the CAPACITI AI Skills Accelerator Programme.
