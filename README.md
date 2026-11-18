@@ -90,7 +90,7 @@ src/
 
 ## Team Members
 
-- [Your full name], [role, e.g. developer and prompt designer]
+- Eben-Jon Willemse, Developer
 
 ## Acknowledgements
 
