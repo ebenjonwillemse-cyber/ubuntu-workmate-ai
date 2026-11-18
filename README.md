@@ -6,7 +6,7 @@ An AI-powered dashboard that helps professionals automate everyday workplace tas
 
 Built as part of the CAPACITI AI Skills Accelerator Programme.
 
-**Live demo:** [(https://ubuntu-workmate-ai.lovable.app)]
+**Live demo:** https://ubuntu-workmate-ai.lovable.app
 
 **Lovable project:** https://lovable.dev/projects/65d97395-0216-49aa-875d-1682d16c67e5
 
