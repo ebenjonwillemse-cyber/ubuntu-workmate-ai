@@ -123,7 +123,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-ZA">
+    <html lang="en-ZA" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -164,7 +164,10 @@ function RootComponent() {
                   <span>
                     AI-generated content may be inaccurate or biased. Review before use. Don't enter
                     confidential or personal information.{" "}
-                    <Link to="/responsible-ai" className="font-medium text-primary hover:underline">
+                    <Link
+                      to="/responsible-ai"
+                      className="font-medium text-primary-bright hover:underline"
+                    >
                       Learn more
                     </Link>
                   </span>

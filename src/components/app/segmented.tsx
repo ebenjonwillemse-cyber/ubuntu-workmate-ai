@@ -24,7 +24,7 @@ export function Segmented<T extends string>({
         <ToggleGroupItem
           key={o}
           value={o}
-          className="h-8 rounded-md text-xs font-medium text-muted-foreground data-[state=on]:bg-card data-[state=on]:text-primary data-[state=on]:shadow-card"
+          className="h-8 rounded-md text-xs font-medium text-muted-foreground data-[state=on]:bg-card data-[state=on]:text-primary-bright data-[state=on]:shadow-card"
         >
           {o}
         </ToggleGroupItem>

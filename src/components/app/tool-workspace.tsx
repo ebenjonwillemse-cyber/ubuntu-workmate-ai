@@ -41,7 +41,7 @@ export function ToolWorkspace(props: Props) {
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-6 md:px-8 md:py-8">
       <div className="mb-6 flex items-start gap-3 animate-fade-up">
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
+        <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary-bright">
           <tool.icon className="size-5" />
         </span>
         <div>
@@ -113,7 +113,7 @@ export function ToolWorkspace(props: Props) {
           <div className="relative p-5">
             {loading && (
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-b-2xl bg-card/80 backdrop-blur-[2px]">
-                <Spinner className="size-7 text-primary" />
+                <Spinner className="size-7 text-primary-bright" />
                 <p className="text-sm font-medium text-muted-foreground">Thinking it through…</p>
               </div>
             )}

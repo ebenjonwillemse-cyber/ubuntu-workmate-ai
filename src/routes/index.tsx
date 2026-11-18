@@ -87,15 +87,15 @@ function Dashboard() {
             <Link
               key={tool.id}
               to={tool.path}
-              className="group flex flex-col rounded-2xl border bg-card p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-elevated animate-fade-up"
+              className="group flex flex-col rounded-2xl border bg-card p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary-bright/40 hover:shadow-elevated animate-fade-up"
               style={{ animationDelay: `${i * 50}ms` }}
             >
-              <span className="flex size-11 items-center justify-center rounded-xl bg-primary-soft text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <span className="flex size-11 items-center justify-center rounded-xl bg-primary-soft text-primary-bright transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <tool.icon className="size-5" />
               </span>
               <h3 className="mt-4 font-semibold text-foreground">{tool.title}</h3>
               <p className="mt-1 flex-1 text-sm text-muted-foreground">{tool.description}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary-bright">
                 Open{" "}
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </span>
@@ -103,7 +103,7 @@ function Dashboard() {
           ))}
           <Link
             to="/responsible-ai"
-            className="flex flex-col rounded-2xl border border-dashed bg-muted/40 p-5 transition-colors hover:border-primary/30"
+            className="flex flex-col rounded-2xl border border-dashed bg-muted/40 p-5 transition-colors hover:border-primary-bright/40"
           >
             <span className="flex size-11 items-center justify-center rounded-xl bg-success-soft text-success">
               <ShieldCheck className="size-5" />
@@ -144,7 +144,7 @@ function Dashboard() {
                     to={tool.path}
                     className="flex items-center gap-3 px-5 py-3 transition-colors hover:bg-muted/50"
                   >
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-primary">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-primary-bright">
                       <tool.icon className="size-4" />
                     </span>
                     <span className="min-w-0 flex-1">

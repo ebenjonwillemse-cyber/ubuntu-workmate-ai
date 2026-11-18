@@ -20,7 +20,7 @@ export function OutputSection({
       <h3
         className={cn(
           "text-xs font-semibold uppercase tracking-wider",
-          tone === "warning" ? "text-warning" : "text-primary",
+          tone === "warning" ? "text-warning" : "text-primary-bright",
         )}
       >
         {title}
