@@ -89,12 +89,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "AI Workplace Productivity Assistant" },
       {
         name: "description",
-        content: "AI tools for South African professionals: emails, meeting notes, task planning, research and chat.",
+        content:
+          "AI tools for South African professionals: emails, meeting notes, task planning, research and chat.",
       },
       { property: "og:title", content: "AI Workplace Productivity Assistant" },
       {
         property: "og:description",
-        content: "AI tools for South African professionals: emails, meeting notes, task planning, research and chat.",
+        content:
+          "AI tools for South African professionals: emails, meeting notes, task planning, research and chat.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -155,10 +157,13 @@ function RootComponent() {
               </main>
               <footer className="sticky bottom-0 z-10 border-t bg-card/95 px-4 py-2.5 backdrop-blur md:px-6">
                 <p className="flex items-start gap-2 text-xs text-muted-foreground">
-                  <ShieldAlert className="mt-0.5 size-3.5 shrink-0 text-warning" aria-hidden="true" />
+                  <ShieldAlert
+                    className="mt-0.5 size-3.5 shrink-0 text-warning"
+                    aria-hidden="true"
+                  />
                   <span>
-                    AI-generated content may be inaccurate or biased. Review before use. Don't enter confidential or
-                    personal information.{" "}
+                    AI-generated content may be inaccurate or biased. Review before use. Don't enter
+                    confidential or personal information.{" "}
                     <Link to="/responsible-ai" className="font-medium text-primary hover:underline">
                       Learn more
                     </Link>

@@ -25,12 +25,10 @@ const inputSchema = z.discriminatedUnion("tool", [
 export const runTool = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => inputSchema.parse(data))
   .handler(async ({ data }): Promise<ToolResult> => {
-    const { generateResponse, GatewayError, RateLimitError, PaymentRequiredError } = await import(
-      "@lovable.dev/ai-gateway"
-    );
-    const { MODEL, SPECS, SCHEMAS, buildSystemPrompt, buildUserMessage } = await import(
-      "./ai-prompts.server"
-    );
+    const { generateResponse, GatewayError, RateLimitError, PaymentRequiredError } =
+      await import("@lovable.dev/ai-gateway");
+    const { MODEL, SPECS, SCHEMAS, buildSystemPrompt, buildUserMessage } =
+      await import("./ai-prompts.server");
 
     try {
       const res = await generateResponse({
@@ -53,7 +51,8 @@ export const runTool = createServerFn({ method: "POST" })
         if (item.type !== "message") continue;
         for (const part of item.content) {
           if (part.type === "output_text") raw += part.text;
-          if (part.type === "refusal") return { ok: false, error: "The AI declined this request. Try rephrasing it." };
+          if (part.type === "refusal")
+            return { ok: false, error: "The AI declined this request. Try rephrasing it." };
         }
       }
       if (!raw) return { ok: false, error: "The AI returned an empty answer. Please try again." };
@@ -62,9 +61,21 @@ export const runTool = createServerFn({ method: "POST" })
       return { ok: true, tool: data.tool, data: parsed } as ToolResult;
     } catch (err) {
       console.error("runTool failed", err);
-      if (err instanceof RateLimitError) return { ok: false, error: "Too many requests right now. Please wait a moment and try again." };
-      if (err instanceof PaymentRequiredError) return { ok: false, error: "AI credits have run out for this workspace. Add credits to continue." };
-      if (err instanceof GatewayError) return { ok: false, error: "The AI service couldn't complete this request. Please try again." };
+      if (err instanceof RateLimitError)
+        return {
+          ok: false,
+          error: "Too many requests right now. Please wait a moment and try again.",
+        };
+      if (err instanceof PaymentRequiredError)
+        return {
+          ok: false,
+          error: "AI credits have run out for this workspace. Add credits to continue.",
+        };
+      if (err instanceof GatewayError)
+        return {
+          ok: false,
+          error: "The AI service couldn't complete this request. Please try again.",
+        };
       return { ok: false, error: "Something went wrong generating your result. Please try again." };
     }
   });

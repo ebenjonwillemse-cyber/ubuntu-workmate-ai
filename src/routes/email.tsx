@@ -15,9 +15,16 @@ export const Route = createFileRoute("/email")({
   head: () => ({
     meta: [
       { title: "Smart Email Generator — AI Workplace Assistant" },
-      { name: "description", content: "Generate professional emails for clients, managers or your team in a formal, friendly or persuasive tone." },
+      {
+        name: "description",
+        content:
+          "Generate professional emails for clients, managers or your team in a formal, friendly or persuasive tone.",
+      },
       { property: "og:title", content: "Smart Email Generator — AI Workplace Assistant" },
-      { property: "og:description", content: "Draft clear, on-tone workplace emails in seconds, then edit and copy." },
+      {
+        property: "og:description",
+        content: "Draft clear, on-tone workplace emails in seconds, then edit and copy.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -66,14 +73,20 @@ function EmailPage() {
               placeholder="e.g. Follow up on the Q3 proposal and request sign-off"
             />
           </Field>
-          <Field id="keypoints" label="Key points" hint="One per line. Leave out confidential details.">
+          <Field
+            id="keypoints"
+            label="Key points"
+            hint="One per line. Leave out confidential details."
+          >
             <Textarea
               id="keypoints"
               rows={6}
               value={keyPoints}
               maxLength={4000}
               onChange={(e) => setKeyPoints(e.target.value)}
-              placeholder={"Pricing valid until month-end\nImplementation can start in 2 weeks\nHappy to set up a call"}
+              placeholder={
+                "Pricing valid until month-end\nImplementation can start in 2 weeks\nHappy to set up a call"
+              }
             />
           </Field>
         </>
@@ -90,7 +103,11 @@ function EmailPage() {
             />
           </OutputSection>
           <OutputSection title="Email body">
-            <EditableText label="Email body" value={output.body} onChange={(body) => setOutput({ ...output, body })} />
+            <EditableText
+              label="Email body"
+              value={output.body}
+              onChange={(body) => setOutput({ ...output, body })}
+            />
           </OutputSection>
         </div>
       )}

@@ -1,7 +1,10 @@
 import type { EmailOutput, MeetingOutput, PlannerOutput, ResearchOutput } from "./tool-types";
 
 const clean = (items: string[]) => items.map((s) => s.trim()).filter(Boolean);
-const bullets = (items: string[]) => clean(items).map((s) => `• ${s}`).join("\n");
+const bullets = (items: string[]) =>
+  clean(items)
+    .map((s) => `• ${s}`)
+    .join("\n");
 const section = (title: string, body: string) => (body.trim() ? `${title}\n${body}` : "");
 const join = (parts: string[]) => parts.filter(Boolean).join("\n\n");
 
@@ -12,7 +15,10 @@ export function emailToText(o: EmailOutput) {
 export function meetingToText(o: MeetingOutput) {
   const rows = o.action_items
     .filter((a) => a.task.trim())
-    .map((a) => `• ${a.task.trim()} — Owner: ${a.owner.trim() || "Unassigned"} — Deadline: ${a.deadline.trim() || "Not specified"}`)
+    .map(
+      (a) =>
+        `• ${a.task.trim()} — Owner: ${a.owner.trim() || "Unassigned"} — Deadline: ${a.deadline.trim() || "Not specified"}`,
+    )
     .join("\n");
   return join([
     section("SUMMARY", o.summary.trim()),

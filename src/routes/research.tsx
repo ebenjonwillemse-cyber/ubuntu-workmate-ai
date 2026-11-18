@@ -13,9 +13,16 @@ export const Route = createFileRoute("/research")({
   head: () => ({
     meta: [
       { title: "AI Research Assistant — AI Workplace Assistant" },
-      { name: "description", content: "Summarise a topic or article into key insights, recommendations and things to verify." },
+      {
+        name: "description",
+        content:
+          "Summarise a topic or article into key insights, recommendations and things to verify.",
+      },
       { property: "og:title", content: "AI Research Assistant — AI Workplace Assistant" },
-      { property: "og:description", content: "Plain-language research summaries that flag what to fact-check." },
+      {
+        property: "og:description",
+        content: "Plain-language research summaries that flag what to fact-check.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -43,7 +50,11 @@ function ResearchPage() {
       getCopyText={() => (output ? researchToText(output) : "")}
       emptyHint="Summary, key insights, recommendations and things to verify will appear here."
       inputs={
-        <Field id="content" label="Topic or article" hint="Topics use general knowledge only — no live web search.">
+        <Field
+          id="content"
+          label="Topic or article"
+          hint="Topics use general knowledge only — no live web search."
+        >
           <Textarea
             id="content"
             rows={14}
@@ -58,10 +69,18 @@ function ResearchPage() {
       {output && (
         <div className="space-y-6">
           <OutputSection title="Simple summary">
-            <EditableText label="Summary" value={output.summary} onChange={(summary) => setOutput({ ...output, summary })} />
+            <EditableText
+              label="Summary"
+              value={output.summary}
+              onChange={(summary) => setOutput({ ...output, summary })}
+            />
           </OutputSection>
           <OutputSection title="Key insights">
-            <EditableList label="Key insights" items={output.key_insights} onChange={(key_insights) => setOutput({ ...output, key_insights })} />
+            <EditableList
+              label="Key insights"
+              items={output.key_insights}
+              onChange={(key_insights) => setOutput({ ...output, key_insights })}
+            />
           </OutputSection>
           <OutputSection title="Recommendations">
             <EditableList

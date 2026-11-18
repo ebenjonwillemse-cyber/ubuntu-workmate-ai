@@ -30,7 +30,9 @@ export function useToolRunner<T extends ToolInput["tool"]>(
         const data = res.data as ToolOutputMap[T];
         setOutput(data);
         addActivity(tool, activityTitle(input, data));
-        toast.success(opts?.regenerate ? "Fresh version generated" : "Done — review and edit below");
+        toast.success(
+          opts?.regenerate ? "Fresh version generated" : "Done — review and edit below",
+        );
       } catch (err) {
         console.error(err);
         toast.error("Couldn't generate", {

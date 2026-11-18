@@ -9,7 +9,6 @@ const bodySchema = z.object({
     .max(40),
 });
 
-
 export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
@@ -21,14 +20,17 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("Invalid request", { status: 400 });
         }
 
-        const { streamResponse, RateLimitError, PaymentRequiredError } = await import("@lovable.dev/ai-gateway");
+        const { streamResponse, RateLimitError, PaymentRequiredError } =
+          await import("@lovable.dev/ai-gateway");
         const { MODEL, CHAT_SPEC, buildSystemPrompt } = await import("@/lib/ai-prompts.server");
         const encoder = new TextEncoder();
 
         const friendly = (err: unknown) => {
           console.error("chat failed", err);
-          if (err instanceof RateLimitError) return "Too many requests right now. Please wait a moment.";
-          if (err instanceof PaymentRequiredError) return "AI credits have run out for this workspace.";
+          if (err instanceof RateLimitError)
+            return "Too many requests right now. Please wait a moment.";
+          if (err instanceof PaymentRequiredError)
+            return "AI credits have run out for this workspace.";
           return "The assistant couldn't respond. Please try again.";
         };
 
@@ -45,10 +47,12 @@ export const Route = createFileRoute("/api/chat")({
                 { signal: request.signal },
               );
               for await (const ev of events) {
-                if (ev.type === "response.output_text.delta") controller.enqueue(encoder.encode(ev.delta));
+                if (ev.type === "response.output_text.delta")
+                  controller.enqueue(encoder.encode(ev.delta));
               }
             } catch (err) {
-              if (!request.signal.aborted) controller.enqueue(encoder.encode(CHAT_ERROR_MARKER + friendly(err)));
+              if (!request.signal.aborted)
+                controller.enqueue(encoder.encode(CHAT_ERROR_MARKER + friendly(err)));
             } finally {
               controller.close();
             }

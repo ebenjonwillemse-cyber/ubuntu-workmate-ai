@@ -1,4 +1,11 @@
-import { CalendarClock, FileText, Mail, MessagesSquare, Search, type LucideIcon } from "lucide-react";
+import {
+  CalendarClock,
+  FileText,
+  Mail,
+  MessagesSquare,
+  Search,
+  type LucideIcon,
+} from "lucide-react";
 
 export type ToolId = "email" | "meeting" | "planner" | "research" | "chat";
 

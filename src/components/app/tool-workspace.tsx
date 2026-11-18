@@ -56,25 +56,55 @@ export function ToolWorkspace(props: Props) {
           className="h-fit rounded-2xl border bg-card p-5 shadow-card lg:sticky lg:top-20"
           aria-label="Inputs"
         >
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Your input</h2>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            Your input
+          </h2>
           <div className="space-y-4">{props.inputs}</div>
-          <Button type="submit" variant="hero" size="lg" className="mt-6 w-full" disabled={!props.canSubmit || loading}>
+          <Button
+            type="submit"
+            variant="hero"
+            size="lg"
+            className="mt-6 w-full"
+            disabled={!props.canSubmit || loading}
+          >
             {loading ? <Spinner /> : <Wand2 />}
             {loading ? "Generating…" : props.submitLabel}
           </Button>
         </form>
 
-        <section className="min-h-[420px] rounded-2xl border bg-card shadow-card" aria-label="AI output" aria-busy={loading}>
+        <section
+          className="min-h-[420px] rounded-2xl border bg-card shadow-card"
+          aria-label="AI output"
+          aria-busy={loading}
+        >
           <div className="flex flex-wrap items-center justify-between gap-2 border-b px-5 py-3">
             <div>
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">AI output</h2>
-              {hasOutput && <p className="text-xs text-muted-foreground">Editable — click any text to change it.</p>}
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                AI output
+              </h2>
+              {hasOutput && (
+                <p className="text-xs text-muted-foreground">
+                  Editable — click any text to change it.
+                </p>
+              )}
             </div>
             <div className="flex gap-2">
-              <Button type="button" variant="outline" size="sm" onClick={copy} disabled={!hasOutput || loading}>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={copy}
+                disabled={!hasOutput || loading}
+              >
                 <Copy /> Copy
               </Button>
-              <Button type="button" variant="soft" size="sm" onClick={props.onRegenerate} disabled={!hasOutput || loading}>
+              <Button
+                type="button"
+                variant="soft"
+                size="sm"
+                onClick={props.onRegenerate}
+                disabled={!hasOutput || loading}
+              >
                 <RefreshCw className={loading ? "animate-spin" : undefined} /> Regenerate
               </Button>
             </div>

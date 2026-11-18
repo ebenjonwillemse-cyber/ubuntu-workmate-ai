@@ -2,12 +2,19 @@ import { Plus, Trash2 } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-export function OutputSection({ title, children, tone }: { title: string; children: ReactNode; tone?: "warning" }) {
+export function OutputSection({
+  title,
+  children,
+  tone,
+}: {
+  title: string;
+  children: ReactNode;
+  tone?: "warning";
+}) {
   return (
     <div className="space-y-2">
       <h3
@@ -38,11 +45,16 @@ export function EditableText({
   className?: string;
 }) {
   return (
-    <Textarea aria-label={label} value={value} onChange={(e) => onChange(e.target.value)} className={cn(editableBase, "-mx-2", className)} />
+    <Textarea
+      aria-label={label}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className={cn(editableBase, "-mx-2", className)}
+    />
   );
 }
 
-/** One item per line; bullets are shown visually, not stored. */
+/** Each item is its own auto-growing field. Enter adds an item; Backspace on an empty item removes it. */
 export function EditableList({
   items,
   onChange,
@@ -54,16 +66,44 @@ export function EditableList({
   label: string;
   emptyText?: string;
 }) {
+  const list = items.length ? items : [""];
+  const focusItem = (el: HTMLElement | null, index: number) => {
+    requestAnimationFrame(() => {
+      const target = el?.closest("ul")?.querySelectorAll("textarea")[index];
+      target?.focus();
+    });
+  };
+
   return (
-    <div>
-      <Textarea
-        aria-label={label}
-        value={items.join("\n")}
-        placeholder={emptyText}
-        onChange={(e) => onChange(e.target.value.split("\n"))}
-        className={cn(editableBase, "rounded-none border-l-2 border-l-primary/30 pl-3 hover:border-l-primary/30 focus-visible:border-l-primary")}
-      />
-    </div>
+    <ul className="space-y-0.5" aria-label={label}>
+      {list.map((item, i) => (
+        <li key={i} className="flex items-start gap-2">
+          <span
+            className="mt-[0.8rem] size-1.5 shrink-0 rounded-full bg-primary/60"
+            aria-hidden="true"
+          />
+          <Textarea
+            rows={1}
+            aria-label={`${label} item ${i + 1}`}
+            value={item}
+            placeholder={i === 0 ? emptyText : ""}
+            onChange={(e) => onChange(list.map((x, idx) => (idx === i ? e.target.value : x)))}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                onChange([...list.slice(0, i + 1), "", ...list.slice(i + 1)]);
+                focusItem(e.currentTarget, i + 1);
+              } else if (e.key === "Backspace" && item === "" && list.length > 1) {
+                e.preventDefault();
+                onChange(list.filter((_, idx) => idx !== i));
+                focusItem(e.currentTarget, Math.max(0, i - 1));
+              }
+            }}
+            className={editableBase}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -88,11 +128,17 @@ export function EditableTable<Row extends Record<string, string>>({
   return (
     <div className="space-y-2">
       <div className="overflow-x-auto rounded-xl border">
-        <table className="w-full min-w-[520px] text-sm" aria-label={label}>
+        <table className="w-full min-w-[460px] text-sm" aria-label={label}>
           <thead className="bg-muted/60">
             <tr>
               {columns.map((c) => (
-                <th key={c.key} className={cn("px-3 py-2 text-left text-xs font-semibold text-muted-foreground", c.className)}>
+                <th
+                  key={c.key}
+                  className={cn(
+                    "px-3 py-2 text-left text-xs font-semibold text-muted-foreground",
+                    c.className,
+                  )}
+                >
                   {c.label}
                 </th>
               ))}
@@ -102,7 +148,10 @@ export function EditableTable<Row extends Record<string, string>>({
           <tbody>
             {rows.length === 0 && (
               <tr>
-                <td colSpan={columns.length + 1} className="px-3 py-4 text-center text-muted-foreground">
+                <td
+                  colSpan={columns.length + 1}
+                  className="px-3 py-4 text-center text-muted-foreground"
+                >
                   No rows yet
                 </td>
               </tr>
@@ -110,16 +159,17 @@ export function EditableTable<Row extends Record<string, string>>({
             {rows.map((row, i) => (
               <tr key={i} className="border-t">
                 {columns.map((c) => (
-                  <td key={c.key} className="px-1.5 py-1">
-                    <Input
+                  <td key={c.key} className="px-1.5 py-1 align-top">
+                    <Textarea
+                      rows={1}
                       aria-label={`${c.label} row ${i + 1}`}
                       value={row[c.key]}
                       onChange={(e) => update(i, c.key, e.target.value)}
-                      className="h-8 border-transparent bg-transparent shadow-none hover:border-input focus-visible:bg-background"
+                      className="field-sizing-content min-h-8 resize-none border-transparent bg-transparent px-2 py-1.5 text-sm shadow-none hover:border-input focus-visible:bg-background"
                     />
                   </td>
                 ))}
-                <td className="px-1">
+                <td className="px-1 py-1 align-top">
                   <Button
                     type="button"
                     variant="ghost"
@@ -135,14 +185,29 @@ export function EditableTable<Row extends Record<string, string>>({
           </tbody>
         </table>
       </div>
-      <Button type="button" variant="ghost" size="sm" onClick={() => onChange([...rows, { ...newRow }])}>
+      <Button
+        type="button"
+        variant="ghost"
+        size="sm"
+        onClick={() => onChange([...rows, { ...newRow }])}
+      >
         <Plus /> Add row
       </Button>
     </div>
   );
 }
 
-export function Field({ id, label, hint, children }: { id: string; label: string; hint?: string; children: ReactNode }) {
+export function Field({
+  id,
+  label,
+  hint,
+  children,
+}: {
+  id: string;
+  label: string;
+  hint?: string;
+  children: ReactNode;
+}) {
   return (
     <div className="space-y-1.5">
       <Label htmlFor={id} className="text-sm font-medium text-foreground">

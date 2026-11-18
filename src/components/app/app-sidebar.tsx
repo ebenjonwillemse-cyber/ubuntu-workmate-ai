@@ -28,7 +28,9 @@ export function AppSidebar() {
         <Link to="/" onClick={close} className="flex items-center gap-2.5 overflow-hidden">
           <BrandLogo className="size-8 rounded-lg group-data-[collapsible=icon]:size-8" />
           <span className="flex min-w-0 flex-col leading-tight group-data-[collapsible=icon]:hidden">
-            <span className="truncate font-display text-sm font-semibold text-foreground">Workplace Assistant</span>
+            <span className="truncate font-display text-sm font-semibold text-foreground">
+              Workplace Assistant
+            </span>
             <span className="truncate text-xs text-muted-foreground">AI productivity, SA-made</span>
           </span>
         </Link>
@@ -72,7 +74,11 @@ export function AppSidebar() {
       <SidebarFooter className="pb-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={pathname === "/responsible-ai"} tooltip="Responsible AI">
+            <SidebarMenuButton
+              asChild
+              isActive={pathname === "/responsible-ai"}
+              tooltip="Responsible AI"
+            >
               <Link to="/responsible-ai" onClick={close}>
                 <ShieldCheck />
                 <span>Responsible AI</span>

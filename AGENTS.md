@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- AI calls run server-side only: structured tools go through `runTool` in `src/lib/ai.functions.ts` (JSON-schema output), chat streams plain text from `src/routes/api/chat.ts`. Why: keeps the gateway key off the client and gives editable, typed results.
+- Every AI feature's system prompt is built with `buildSystemPrompt` in `src/lib/ai-prompts.server.ts` (ROLE / TASK / OUTPUT FORMAT / CONSTRAINTS + shared constraints); `src/test/prompts.test.ts` enforces this. Why: consistent, testable responsible-AI behaviour.
+- No login and no database: recent activity and chat history live in browser localStorage (`src/lib/activity.ts`, chat page). Why: the product is intentionally account-free.
+- Tool pages share `ToolWorkspace` (input left, editable output right, Copy/Regenerate) and the editors in `src/components/app/editable.tsx`. Why: identical UX across tools.
